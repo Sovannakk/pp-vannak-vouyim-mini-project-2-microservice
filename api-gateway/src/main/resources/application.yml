@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: api-gateway
+          uri: http://localhost:8080
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+        - id: keycloak-admin-client
+          uri: lb://keycloak-admin-client
+          predicates:
+            - Path=/keycloak-admin-client/**
+          filters:
+            - RewritePath=/keycloak-admin-client/(?<path>.*), /$\{path}
+  application:
+    name: api-gateway
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
