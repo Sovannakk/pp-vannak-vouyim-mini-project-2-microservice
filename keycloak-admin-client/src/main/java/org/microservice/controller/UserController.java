@@ -17,40 +17,40 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("api/v1/users")
+    @PostMapping("users")
     public ResponseEntity<?> createUser(@RequestBody UserRequest userRequest){
         return ResponseEntity.ok().body(userService.createUser(userRequest));
     }
 
-    @GetMapping("api/v1/users")
+    @GetMapping("users")
     public ResponseEntity<?> getAllUser(){
         return ResponseEntity.ok().body(userService.getAllUser());
     }
 
-    @GetMapping("api/v1/users/username")
+    @GetMapping("users/username")
     @SecurityRequirement(name = "mini-project-auth")
     public ResponseEntity<?> getUserByUsername(@RequestParam String username){
         return ResponseEntity.ok().body(userService.getUserByUsername(username));
     }
 
-    @GetMapping("api/v1/users/email")
+    @GetMapping("users/email")
     @SecurityRequirement(name = "mini-project-auth")
     public ResponseEntity<?> getUserByEmail(@RequestParam String email){
         return ResponseEntity.ok().body(userService.getUserByEmail(email));
     }
 
-    @GetMapping("api/v1/users/{id}")
+    @GetMapping("users/{id}")
     public ResponseEntity<?> getUserById(@PathVariable UUID id){
         return ResponseEntity.ok().body(userService.getUserById(id));
     }
 
-    @DeleteMapping("api/v1/users/{id}")
+    @DeleteMapping("users/{id}")
     @SecurityRequirement(name = "mini-project-auth")
     public ResponseEntity<?> deleteUser(@PathVariable UUID id){
         return ResponseEntity.ok().body(userService.deleteUser(id));
     }
 
-    @PutMapping("api/v1/users/{id}")
+    @PutMapping("users/{id}")
     @SecurityRequirement(name = "mini-project-auth")
     public ResponseEntity<?> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequest userUpdateRequest){
         return ResponseEntity.ok().body(userService.updateUser(id, userUpdateRequest));

@@ -2,18 +2,18 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: api-gateway
+        - id: openapi
           uri: http://localhost:8080
           predicates:
             - Path=/v3/api-docs/**
           filters:
             - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
         - id: keycloak-admin-client
-          uri: lb://keycloak-admin-client
+          uri: lb://keycloak
           predicates:
-            - Path=/keycloak-admin-client/**
+            - Path=/**
           filters:
-            - RewritePath=/keycloak-admin-client/(?<path>.*), /$\{path}
+            - RewritePath=/keycloak/(?<path>.*), /$\{path}
   application:
     name: api-gateway
 

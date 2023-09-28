@@ -16,11 +16,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class KeycloakSecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.csrf(AbstractHttpConfigurer::disable)
+        return http.cors(AbstractHttpConfigurer::disable).csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll();
-                    auth.requestMatchers("api/v1/users").permitAll();
-                    auth.requestMatchers(HttpMethod.GET,"api/v1/users/{id}").permitAll();
+                    auth.requestMatchers("users").permitAll();
+                    auth.requestMatchers(HttpMethod.GET,"users/{id}").permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults())).build();

@@ -20,19 +20,7 @@ public class SwaggerConfig {
                 .stream()
                 .map(RouteDefinition::getId)
                 .filter(id -> id.matches(".*-admin-client"))
+                .map(id -> id.replace("-admin-client", ""))
                 .forEach(swaggerUiParameters::addGroup);
     }
-
-    @Bean
-    public CommandLineRunner openApiGroupsApiGateway(
-            RouteDefinitionLocator locator,
-            SwaggerUiConfigParameters swaggerUiParameters) {
-        return args -> Objects.requireNonNull(locator
-                        .getRouteDefinitions().collectList().block())
-                .stream()
-                .map(RouteDefinition::getId)
-                .filter(id -> id.matches(".*-gateway"))
-                .forEach(swaggerUiParameters::addGroup);
-    }
-
 }
