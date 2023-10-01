@@ -40,4 +40,9 @@ public class GroupController {
     public ResponseEntity<?> deleteGroup(@PathVariable UUID id){
         return ResponseEntity.ok().body(groupService.deleteGroup(id));
     }
+
+    @GetMapping("groups/{id}")
+    public ResponseEntity<?> getGroupById(@PathVariable UUID id){
+        return ResponseEntity.ok().body(groupService.getGroupById(id));
+    }
 }

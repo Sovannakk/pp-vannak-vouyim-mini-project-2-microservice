@@ -18,7 +18,8 @@ services:
       - "5430:5432"
 
   keycloak:
-    image: sleighzy/keycloak:16.1.0-arm64
+#    image: sleighzy/keycloak:16.1.0-arm64
+    image: jboss/keycloak:16.1.0
     environment:
       DB_VENDOR: POSTGRES
       DB_ADDR: postgres

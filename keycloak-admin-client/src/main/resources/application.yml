@@ -17,7 +17,7 @@ keycloak:
   auth-server-url: http://localhost:9090/auth/ #docker container
   credentials:
     client-id: mini-project
-    secret: lEEUi2nQpBG0XVzV8rtaEnlkcXApRrkF
+    secret: 5uW9pDiOKqZRs9im1loJz5bQmYPUnNvV
     provider: secret
 
 eureka:

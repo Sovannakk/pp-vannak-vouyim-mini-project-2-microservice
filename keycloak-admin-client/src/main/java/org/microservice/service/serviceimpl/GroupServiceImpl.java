@@ -16,6 +16,7 @@ import org.microservice.service.GroupService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
@@ -83,4 +84,12 @@ public class GroupServiceImpl implements GroupService {
         groupRepresentation.setName(name);
         return groupRepresentation;
     }
+
+    @Override
+    public Group getGroupById(UUID id) {
+        GroupsResource groupsResource = keycloak.realm(realm).groups();
+        GroupRepresentation groupRepresentation = groupsResource.group(String.valueOf(id)).toRepresentation();
+        return GroupMapper.toDto(groupRepresentation);
+    }
+
 }

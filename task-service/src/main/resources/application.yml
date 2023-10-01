@@ -8,7 +8,7 @@ spring:
 
   jpa:
     database: POSTGRESQL
-    hibernate.ddl-auto: create-drop
+    hibernate.ddl-auto: update
     show-sql: true
     properties:
       hibernate:
@@ -17,3 +17,13 @@ spring:
     multipart:
       maxFileSize: 2000MB
       maxRequestSize: 2000MB
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:9090/auth/realms/mini-project-2
+          jwk-set-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}/protocol/openid-connect/certs
+
+server:
+  port: 8089
