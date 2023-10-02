@@ -36,7 +36,7 @@ public class TaskController {
     }
 
     @PutMapping("tasks/{id}")
-    public TaskDto updateTask(@RequestParam UUID id, @RequestBody TaskRequest taskRequest, @AuthenticationPrincipal Jwt jwt){
+    public TaskDto updateTask(@PathVariable UUID id, @RequestBody TaskRequest taskRequest, @AuthenticationPrincipal Jwt jwt){
         return taskService.updateTask(id,taskRequest,jwt);
     }
 
