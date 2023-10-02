@@ -1,22 +1,51 @@
 spring:
-  cloud:
-    gateway:
-      routes:
-        - id: openapi
-          uri: http://localhost:8080
-          predicates:
-            - Path=/v3/api-docs/**
-          filters:
-            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
-        - id: keycloak-admin-client
-          uri: lb://keycloak
-          predicates:
-            - Path=/**
-          filters:
-            - RewritePath=/keycloak/(?<path>.*), /$\{path}
   application:
-    name: api-gateway
+    name: api-gateway-service
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: task-service
+#          uri: http://localhost:9092/
+#          predicates:
+#            - Path=/task/* , /v3/api-docs/task
+#        - id: keycloak-service
+#          uri: http://localhost:9091/
+#          predicates:
+#            - Path=/keycloak/* , /v3/api-docs/keycloak
+#        - id: openapi
+#          uri: http://localhost:${server.port}
+#          predicates:
+#            - Path=/v3/api-docs/**
+#          filters:
+#            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+#        - id: keycloak-service
+#          uri: lb://keycloak
+#          predicates:
+#            - Path=/** , /v3/api-docs/keycloak
+#          filters:
+#            - RewritePath=/keycloak/(?<path>.*), /$\{path}
+#          filters:
+#            - RewritePath=/task/(?<path>.*), /$\{path}
 
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+      - url: /task-service/v3/api-docs
+        name: Task Service
+      - url: /keycloak-service/v3/api-docs
+        name: Keycloak Service
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
 
 eureka:
   client:
@@ -24,3 +53,8 @@ eureka:
     fetch-registry: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0

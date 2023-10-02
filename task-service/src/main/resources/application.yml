@@ -1,9 +1,12 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/task
+#    url: jdbc:postgresql://localhost:5432/task
+#    username: postgres
+#    password: admin
     username: postgres
-    password: admin
+    password: 2003
+    url: jdbc:postgresql://localhost:5432/task_database
 
 
   jpa:
@@ -26,4 +29,24 @@ spring:
           jwk-set-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}/protocol/openid-connect/certs
 
 server:
-  port: 8089
+  port: 9092
+  servlet:
+    context-path: /
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+openapi:
+  service:
+    title: task-service
+    version: 1.0.0
+    url: http://localhost:8080
+springdoc:
+  api-docs:
+    path: /task-service/v3/api-docs
+  swagger-ui:
+    path: /task-service/swagger-ui.html
