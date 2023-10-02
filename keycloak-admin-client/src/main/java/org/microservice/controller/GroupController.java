@@ -26,6 +26,11 @@ public class GroupController {
         return ResponseEntity.ok().body(groupService.getAllGroup());
     }
 
+    @GetMapping("groups/{id}")
+    public ResponseEntity<?> getGroupById(@PathVariable UUID id){
+        return ResponseEntity.ok().body(groupService.getGroupById(id));
+    }
+
     @GetMapping("groups/{groupId}/users")
     public ResponseEntity<?> getAllUserByGroupId(@PathVariable UUID groupId){
         return ResponseEntity.ok().body(groupService.getAllUserByGroupId(groupId));

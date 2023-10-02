@@ -78,6 +78,13 @@ public class GroupServiceImpl implements GroupService {
         return userRepresentations.stream().map(UserMapper::toDto).toList();
     }
 
+    @Override
+    public Group getGroupById(UUID id) {
+        GroupsResource groupsResource = keycloak.realm(realm).groups();
+        GroupRepresentation groupRepresentation = groupsResource.group(String.valueOf(id)).toRepresentation();
+        return GroupMapper.toDto(groupRepresentation);
+    }
+
     public GroupRepresentation prepareGroupRepresentation(String name){
         GroupRepresentation groupRepresentation = new GroupRepresentation();
         groupRepresentation.setName(name);

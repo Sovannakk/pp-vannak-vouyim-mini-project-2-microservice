@@ -17,4 +17,6 @@ public interface GroupService {
     String deleteGroup(UUID id);
 
     List<User> getAllUserByGroupId(UUID groupId);
+
+    Group getGroupById(UUID id);
 }
